@@ -360,7 +360,7 @@ void FileHandle::pipeMatch(){
 		sprintf(logs, "Number of wrong testcases: %lld\n", NumberOfWrongCases);
 		Logs::WriteLine(logs);
 	}
-	
+
 	if ( !(fpipe = (FILE*)popen(command,"r")) ){
 	// If fpipe is NULL
 		perror("Problems with pipe");
@@ -373,7 +373,7 @@ void FileHandle::pipeMatch(){
 		}
 		//cout<<line<<endl;
 	}
-	
+
 
 	pclose(fpipe);
 }
@@ -401,8 +401,8 @@ void FileHandle::SendResults(){
 
 	if(CROptions::SendResults) FileCurl.SendResultsToWebpage(fileid, status, detailstatus, timeused, memoryused, numberofwrongtestcases);
 	else{
-		char output[200];
-		sprintf(output, "FileId ==> %s\nStatus==>%s\nDetailStatus==>%s\nTimeUsed==>%s\nMemoryUsed==>%s\nLanguage==>%s\nNumberOfWrongCases==>%s\n", fileid, status, detailstatus, timeused, memoryused, FileInfo->lang, numberofwrongtestcases);
+		char output[500];
+		sprintf(output, "FileId ==> %s\nStatus==>%s\nDetailStatus==>%.300s\nTimeUsed==>%s\nMemoryUsed==>%s\nLanguage==>%s\nNumberOfWrongCases==>%s\n", fileid, status, detailstatus, timeused, memoryused, FileInfo->lang, numberofwrongtestcases);
 		cout<<output;
 	}
 	Logs::WriteLine("\n================================================================================\n");
