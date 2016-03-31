@@ -210,7 +210,12 @@ int main(int args, char *argv[]){
 		SetResourceLimitValues(TimeLimit);
 		if(strcmp(lang, "python")==0){
 			strcat(InputFile, ".pyc");
+#if RESTRICT_PYTHON
+			char *const env[] = {(char*) "PYTHONHOME=" PYTHON_HOME, NULL};
+			if(execle("/usr/bin/python", "/usr/bin/python", InputFile, (char *) NULL, env) == -1){
+#else
 			if(execl("/usr/bin/python", "/usr/bin/python", InputFile, (char *) NULL) == -1){
+#endif
 				fclose(stdout);
 				ToPipe("IE ERROR File not present or some other error.");
 			}

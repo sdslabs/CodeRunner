@@ -42,6 +42,9 @@
 #define FILEPATH "./Local/Files/"
 #define TESTCASESPATH "./Local/TestCases/"
 
+#define RESTRICT_PYTHON false
+#define PYTHON_HOME "/home/grader/python"
+
 /**
  * Specify the URL where results will be sent here.
  * Same username and password will be used as above.
