@@ -184,4 +184,31 @@ To secure java submissions, we rely on enabling Java Security Manager and specif
 
 Further details about it can be found [here](http://pic.dhe.ibm.com/infocenter/cicsts/v4r1/index.jsp?topic=%2Fcom.ibm.cics.ts.java.doc%2Ftopics%2Fdfhpj5u.html).
 
-Refer [this](http://stackoverflow.com/questions/11620354/running-java-security-manager-without-the-default-java-policy-file) for differentiating between use of '=' and '==' while running Java Security Manager. 
+Refer [this](http://stackoverflow.com/questions/11620354/running-java-security-manager-without-the-default-java-policy-file) for differentiating between use of '=' and '==' while running Java Security Manager.
+
+
+
+Securing Python Submissions
+===
+
+To secure the python submissions, we point the environment variable `PYTHONHOME`, where the python looks for files to import, to a custom python compilation from which we remove the unwanted python modules like `socket`, `Popen`, etc.
+
+To create the new python home, download the source code and extract it to a folder. To compile, follow these commands:
+
+  1. First configure it and set the installation directory
+
+      $ ./configure --prefix=$HOME/python   # The directory where the python will get installed
+
+  2. Build
+
+      $ make
+
+  3. Install
+
+      $ make install
+
+
+Go the `lib/python2.7` sub directory and remove the modules you don't want others to access.
+
+To user this directory, in the config.sh (sample.config.h if you want run `Install.sh`), set `RESTRICTED_PYTHON` to `true` and `PYTHON_HOME` to the new python directory created (in the above case, /home/user/python).
+
