@@ -65,6 +65,7 @@ class CROptions
 	static const char* password;
 	static bool lang_c;
 	static bool lang_cpp;
+	static bool lang_cpp14;
 	static bool lang_java;
 	static bool lang_php;
 	static bool lang_python;

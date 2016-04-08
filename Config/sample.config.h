@@ -91,6 +91,7 @@
 
 #define LANG_C true
 #define LANG_CPP true
+#define LANG_CPP14 true
 #define LANG_JAVA true
 #define LANG_PYTHON true
 #define LANG_PERL true

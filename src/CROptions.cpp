@@ -16,6 +16,7 @@ const char* CROptions::username = USERNAME;
 const char* CROptions::password = PASSWORD;
 bool CROptions::lang_c = LANG_C;
 bool CROptions::lang_cpp = LANG_CPP;
+bool CROptions::lang_cpp14 = LANG_CPP14;
 bool CROptions::lang_java = LANG_JAVA;
 bool CROptions::lang_php = LANG_PHP;
 bool CROptions::lang_python = LANG_PYTHON;

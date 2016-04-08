@@ -22,6 +22,12 @@ FileHandle::FileHandle(FileInfoStruct* FileInfo){
 
 
 int FileHandle::CheckLANG(){
+    if(strcmp(FileInfo->lang, "cpp14")==0 && !CROptions::lang_cpp14)
+    {
+        strcpy(status, "CE");
+        strcpy(detailstatus, "You are not allowed to make submissions in C++");
+        return -1;
+    }
     if(strcmp(FileInfo->lang, "cpp")==0 && !CROptions::lang_cpp)
     {
         strcpy(status, "CE");
@@ -139,6 +145,7 @@ int FileHandle::MakeDir(){
 	else if(strcmp(FileInfo->lang, "pascal")==0) sprintf(systemString, "cp %s.txt %s.p", FileAddr, FullFileAddr);
 	else if(strcmp(FileInfo->lang, "php")==0) sprintf(systemString, "cp %s.txt %s.php", FileAddr, FullFileAddr);
 	else if(strcmp(FileInfo->lang, "perl")==0) sprintf(systemString, "cp %s.txt %s.pl", FileAddr, FullFileAddr);
+	else if(strcmp(FileInfo->lang, "cpp14")==0) sprintf(systemString, "cp %s.txt %s.cpp", FileAddr, FullFileAddr);
 	else sprintf(systemString, "cp %s.txt %s.%s", FileAddr, FullFileAddr, FileInfo->lang);
 	if(system(systemString)==-1){
 		strcpy(status, "IE");
@@ -165,11 +172,13 @@ void FileHandle::Compile(){
 
 void FileHandle::pipeCompile(){
 	FILE *fpipe;
-    if(strcmp(FileInfo->lang, "cpp")==0)
-    	sprintf(command, "g++ -w -I ../../gcc -static %s.cpp -o %s 2>&1", FullFileAddr, FullFileAddr);
-    else if(strcmp(FileInfo->lang, "c") == 0)
-    	sprintf(command, "gcc -w -I ../../gcc -static %s.c -o %s 2>&1", FullFileAddr, FullFileAddr);
-    else if(strcmp(FileInfo->lang, "java")==0)
+	if(strcmp(FileInfo->lang, "cpp14")==0)
+		sprintf(command, "g++ -std=c++0x -w -I ../../gcc -static %s.cpp -o %s 2>&1", FullFileAddr, FullFileAddr);
+	else if(strcmp(FileInfo->lang, "cpp")==0)
+		sprintf(command, "g++ -w -I ../../gcc -static %s.cpp -o %s 2>&1", FullFileAddr, FullFileAddr);
+	else if(strcmp(FileInfo->lang, "c") == 0)
+		sprintf(command, "gcc -w -I ../../gcc -static %s.c -o %s 2>&1", FullFileAddr, FullFileAddr);
+	else if(strcmp(FileInfo->lang, "java")==0)
 		sprintf(command, "javac %s.java", FullFileAddr);
 	else if(strcmp(FileInfo->lang, "python")==0)
 		sprintf(command, "python -m py_compile %s.py", FullFileAddr);
